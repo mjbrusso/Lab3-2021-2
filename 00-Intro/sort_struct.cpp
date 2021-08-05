@@ -1,3 +1,5 @@
+// TODO: Translate this code to C++
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
