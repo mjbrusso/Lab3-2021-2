@@ -1,46 +1,52 @@
-// TODO: Translate this code to C++
+#include <algorithm>
+#include <iomanip>
+#include <iostream>
+#include <string>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+using namespace std;
 
-typedef struct {
-  int matricula;
-  char nome[100];
-  float salario;
-} funcionario;
+struct funcionario {
+    int matricula;
+    string nome;
+    float salario;
+};
 
-#define NFUNC 4
-
-int ordenasalario(const void* p1, const void* p2) {
-  const funcionario *pf1 = p1, *pf2 = p2;
-
-  if (pf1->salario < pf2->salario)
-    return 1;
-  else if (pf1->salario > pf2->salario)
-    return -1;
-  else  // Empatou
-    return strcmp(pf1->nome, pf2->nome);
+bool ordenasalario(funcionario a, funcionario b)
+{
+    if (a.salario < b.salario)
+        return false;
+    else if (a.salario > b.salario)
+        return true;
+	
+	return a.nome < b.nome;
 }
 
-int main() {
-  funcionario equipe[NFUNC];
+int main()
+{
+    const int NFUNC = 4;
 
-  for (int i = 0; i < NFUNC; i++) {
-    printf("Informe dados do funcionário\n");
-    printf("  Matrícula: ");
-    scanf("%d%*c", &equipe[i].matricula);
-    printf("  Nome.....: ");
-    scanf("%[^\n]", equipe[i].nome);
-    printf("  Salário..: ");
-    scanf("%f", &equipe[i].salario);
-  }
+    //setlocale(LC_ALL, "portuguese");
+    funcionario equipe[NFUNC];
 
-  qsort(equipe, NFUNC, sizeof(funcionario), ordenasalario);
+    for (int i = 0; i < NFUNC; i++) {
+        cout << "Informe dados do funcionário\n"
+             << "  Matricula: ";
 
-  for (int i = 0; i < NFUNC; i++) {
-    printf("#%d Matrícula: %06d Nome: %-40s Salário: %10.2f\n", i,
-           equipe[i].matricula, equipe[i].nome, equipe[i].salario);
-  }
-  return 0;
+        cin >> equipe[i].matricula;
+        cin.ignore();
+        cout << "  Nome.....: ";
+        getline(cin, equipe[i].nome);
+        cout << "  Salario..: ";
+        cin >> equipe[i].salario;
+    }
+
+    sort(equipe, equipe + NFUNC, ordenasalario);
+
+	cout << endl;
+    for (int i = 0; i < NFUNC; i++) {
+        cout << "#" << i << " Matricula: " << setfill('0') << setw(6) << equipe[i].matricula
+             << " Nome: " << setfill(' ') << setw(40) << left << equipe[i].nome
+             << " Salario: " << right << setfill(' ') << setw(13) << fixed << setprecision(2) << equipe[i].salario << endl;
+    }
+    return 0;
 }
