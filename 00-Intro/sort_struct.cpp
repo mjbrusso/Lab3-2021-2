@@ -11,15 +11,11 @@ struct funcionario {
     float salario;
 };
 
-bool ordenasalario(funcionario a, funcionario b)
-{
-    if (a.salario < b.salario)
-        return false;
-    else if (a.salario > b.salario)
-        return true;
-	
-	return a.nome < b.nome;
-}
+// bool ordenasalario(const funcionario &a, const funcionario &b)
+// {
+//     //return a.salario > b.salario || (a.salario == b.salario && a.nome < b.nome);
+//     return (a.salario == b.salario) ? (a.nome < b.nome) : (a.salario > b.salario);
+// }
 
 int main()
 {
@@ -40,13 +36,21 @@ int main()
         cin >> equipe[i].salario;
     }
 
-    sort(equipe, equipe + NFUNC, ordenasalario);
+    sort(begin(equipe),
+         end(equipe),
+         [](const funcionario &a, const funcionario &b) {
+             return a.salario > b.salario || (a.salario == b.salario && a.nome < b.nome);
+         });
 
-	cout << endl;
+    cout << endl;
     for (int i = 0; i < NFUNC; i++) {
-        cout << "#" << i << " Matricula: " << setfill('0') << setw(6) << equipe[i].matricula
-             << " Nome: " << setfill(' ') << setw(40) << left << equipe[i].nome
-             << " Salario: " << right << setfill(' ') << setw(13) << fixed << setprecision(2) << equipe[i].salario << endl;
+        cout << "#" << i << " Matricula: "
+             << setfill('0') << setw(6) << equipe[i].matricula
+             << " Nome: "
+             << setfill(' ') << setw(40) << left << equipe[i].nome
+             << " Salario: "
+             << setfill(' ') << right << setw(10) << fixed << setprecision(2) << equipe[i].salario
+             << endl;
     }
     return 0;
 }
