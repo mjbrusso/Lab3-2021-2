@@ -54,6 +54,11 @@ class point3D : public point2D {
 
    public:
     point3D(int px, int py, int pz) : point2D(px, py), z{pz} {
+        cout << this << endl;
+    }
+
+    void foo(){
+        cout << "Foo " << x << endl;
     }
 
     point3D() : point3D(0, 0, 0) {
@@ -67,8 +72,15 @@ class point3D : public point2D {
     int getZ() {
         return z;
     }
+    bool operator==(const point3D &rhs) {
+        return x == rhs.x && y == rhs.y && z == rhs.z;
+    }
+
+    bool operator!=(const point3D &rhs) {
+        return !(*this==rhs);
+    }
+
     friend ostream &operator<<(ostream &os, const point3D &p);
-    friend bool operator==(const point3D &lhs, const point3D &rhs);
 };
 
 ostream &operator<<(ostream &os, const point3D &p) {
@@ -77,18 +89,13 @@ ostream &operator<<(ostream &os, const point3D &p) {
 
 // TODO: operator- 3D
 
-bool operator==(const point3D &lhs, const point3D &rhs) {
-    return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
-}
-
-bool operator!=(const point3D &lhs, const point3D &rhs) {
-    return !(lhs==rhs);
-}
-
 int main() {
     point3D p3(22, 33, 44), pb(55, 22, 0);
+    
+    p3.foo();
+    pb.foo();
 
-    if (p3 == pb)
+    if (p3 != pb)
         cout << p3 << " e " << pb
              << " são iguais" << endl;
     else
