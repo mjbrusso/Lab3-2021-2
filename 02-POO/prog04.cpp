@@ -4,7 +4,7 @@
 using namespace std;
 
 class point2D {
-   private:
+   protected:
     int x, y;
 
    public:
@@ -48,13 +48,31 @@ ostream &operator<<(ostream &os, const point2D &p) {
     return os << "(" << p.x << ", " << p.y << ")";
 }
 
+class point3D : public point2D {
+   private:
+    int z;
+
+   public:
+    point3D(int px, int py, int pz) : point2D(px, py), z{pz} {
+    }
+
+    point3D() : point3D(0, 0, 0) {
+    }
+
+    void setZ(int pz) {
+        z = pz;
+    }
+
+    // getters
+    int getZ() {
+        return z;
+    }
+};
+
 int main() {
-    point2D pa(2, 2);
-    point2D pb(5, 0);
+    point3D p3(22, 33, 44);
 
-    float d = pa - pb;
-    cout << "A distância entre " << pa
-         << " e " << pb
-         << " é " << d << endl;
+    p3.getX();
 
+    cout << p3 << endl;
 }
