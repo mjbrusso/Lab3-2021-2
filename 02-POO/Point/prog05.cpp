@@ -9,10 +9,7 @@ class point2D {
 
    public:
     // Construtores
-    point2D(int px, int py) : x{px}, y{py} {
-    }
-
-    point2D() : point2D(0, 0) {
+    point2D(int px=0, int py=0) : x{px}, y{py} {
     }
 
     // setters
@@ -89,7 +86,14 @@ ostream &operator<<(ostream &os, const point3D &p) {
 
 // TODO: operator- 3D
 
+
+void sayHello(std::string who="unknown"){
+    std::cout << "Hello, " << who << endl;
+}
+
 int main() {
+
+    sayHello("Marcos");
     point3D p3(22, 33, 44), pb(55, 22, 0);
     
     p3.foo();
