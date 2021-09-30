@@ -13,6 +13,7 @@ class animal {
     animal(const std::string &pn = "") : name{pn} {
     }
 
+    virtual ~animal(){}
     virtual void speak()=0;
 };
 #endif
