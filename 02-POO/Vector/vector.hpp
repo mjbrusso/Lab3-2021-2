@@ -25,9 +25,15 @@ class vector {
                m_size{0},
                m_array{new value_type[m_capacity]} {
     }
+    
+    vector(const vector& other) : m_capacity{other.m_capacity},
+                                  m_size{other.m_size},
+                                  m_array{new value_type[other.m_capacity]} {
+        std::copy(other.m_array, other.m_array + other.m_size, m_array);
+    }
 
     // destructor
-    ~vector() {
+    virtual ~vector() {
         delete[] m_array;
     }
 
@@ -58,8 +64,19 @@ class vector {
         return m_array[pos];
     }
 
-    const_reference operator[](size_type pos) const{
+    const_reference operator[](size_type pos) const {
         return m_array[pos];
+    }
+
+    vector& operator=(const vector& rhs) {
+        if (this != &rhs) {
+            m_capacity = rhs.m_capacity;
+            m_size = rhs.m_size;
+            delete[] m_array;
+            m_array = new value_type[m_capacity];
+            std::copy(rhs.m_array, rhs.m_array + rhs.m_size, m_array);
+        }
+        return *this;
     }
 };
 
