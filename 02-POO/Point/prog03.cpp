@@ -49,7 +49,7 @@ ostream &operator<<(ostream &os, const point2D &p) {
 }
 
 int main() {
-    point2D pa(2, 2);
+    point2D pa{2, 2};
     point2D pb(5, 0);
 
     float d = pa - pb;
