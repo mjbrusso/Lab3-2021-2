@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    on_valor_spinBox_valueChanged(ui->valor_spinBox->value());
 }
 
 MainWindow::~MainWindow()
@@ -22,5 +23,5 @@ void MainWindow::on_ok_pushButton_clicked()
 void MainWindow::on_valor_spinBox_valueChanged(int arg1)
 {
     int dobro = arg1 * 2;
-    ui->dobro_label->setText();
+    ui->dobro_label->setText(QString::number(dobro));
 }
