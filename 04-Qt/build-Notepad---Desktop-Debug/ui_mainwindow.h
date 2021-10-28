@@ -32,6 +32,8 @@ public:
     QAction *actionOpen;
     QAction *actionSave;
     QAction *actionQuit;
+    QAction *actionSave_as;
+    QAction *actionFont;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QPlainTextEdit *plainTextEdit;
@@ -49,20 +51,50 @@ public:
         MainWindow->resize(463, 325);
         actionNew = new QAction(MainWindow);
         actionNew->setObjectName(QStringLiteral("actionNew"));
-        QIcon icon(QIcon::fromTheme(QStringLiteral("document-new")));
+        QIcon icon;
+        QString iconThemeName = QStringLiteral("document-new");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon.addFile(QStringLiteral("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
         actionNew->setIcon(icon);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
-        QIcon icon1(QIcon::fromTheme(QStringLiteral("document-open")));
+        QIcon icon1;
+        iconThemeName = QStringLiteral("document-open");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon1 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon1.addFile(QStringLiteral("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
         actionOpen->setIcon(icon1);
         actionSave = new QAction(MainWindow);
         actionSave->setObjectName(QStringLiteral("actionSave"));
-        QIcon icon2(QIcon::fromTheme(QStringLiteral("document-save")));
+        QIcon icon2;
+        iconThemeName = QStringLiteral("document-save");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon2 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon2.addFile(QStringLiteral("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
         actionSave->setIcon(icon2);
         actionQuit = new QAction(MainWindow);
         actionQuit->setObjectName(QStringLiteral("actionQuit"));
-        QIcon icon3(QIcon::fromTheme(QStringLiteral("application-exit")));
+        QIcon icon3;
+        iconThemeName = QStringLiteral("application-exit");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon3 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon3.addFile(QStringLiteral("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
         actionQuit->setIcon(icon3);
+        actionSave_as = new QAction(MainWindow);
+        actionSave_as->setObjectName(QStringLiteral("actionSave_as"));
+        QIcon icon4(QIcon::fromTheme(QStringLiteral("document-save-as")));
+        actionSave_as->setIcon(icon4);
+        actionFont = new QAction(MainWindow);
+        actionFont->setObjectName(QStringLiteral("actionFont"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -100,8 +132,10 @@ public:
         menuFile->addAction(actionNew);
         menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
+        menuFile->addAction(actionSave_as);
         menuFile->addSeparator();
         menuFile->addAction(actionQuit);
+        menu_Edit->addAction(actionFont);
         mainToolBar->addAction(actionNew);
         mainToolBar->addAction(actionOpen);
         mainToolBar->addAction(actionSave);
@@ -155,6 +189,17 @@ public:
 #ifndef QT_NO_SHORTCUT
         actionQuit->setShortcut(QApplication::translate("MainWindow", "Ctrl+Q", Q_NULLPTR));
 #endif // QT_NO_SHORTCUT
+        actionSave_as->setText(QApplication::translate("MainWindow", "Save as...", Q_NULLPTR));
+#ifndef QT_NO_TOOLTIP
+        actionSave_as->setToolTip(QApplication::translate("MainWindow", "Save as", Q_NULLPTR));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_SHORTCUT
+        actionSave_as->setShortcut(QApplication::translate("MainWindow", "Ctrl+Shift+S", Q_NULLPTR));
+#endif // QT_NO_SHORTCUT
+        actionFont->setText(QApplication::translate("MainWindow", "Font...", Q_NULLPTR));
+#ifndef QT_NO_TOOLTIP
+        actionFont->setToolTip(QApplication::translate("MainWindow", "Choose text font", Q_NULLPTR));
+#endif // QT_NO_TOOLTIP
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", Q_NULLPTR));
         menu_Edit->setTitle(QApplication::translate("MainWindow", "&Edit", Q_NULLPTR));
         menu_Help->setTitle(QApplication::translate("MainWindow", "&Help", Q_NULLPTR));
