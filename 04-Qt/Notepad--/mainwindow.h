@@ -15,8 +15,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+
+    void on_actionOpen_triggered();
+
 private:
     Ui::MainWindow *ui;
+    QString currentFileName;
+    void showName();
 };
 
 #endif // MAINWINDOW_H
