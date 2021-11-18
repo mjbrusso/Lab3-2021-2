@@ -1,2 +1,8 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>img/logo.png</file>
+    </qresource>
+    <qresource prefix="/lang">
+        <file>pt_BR.qm</file>
+    </qresource>
+</RCC>

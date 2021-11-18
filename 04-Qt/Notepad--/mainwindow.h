@@ -27,12 +27,14 @@ private slots:
 
     void on_actionFont_triggered();
 
+    void on_actionAbout_Notepad_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString currentFileName;
     void showName();
     void setCurrentFileName(const QString& name);
-    void saveFile(bool isSaveAs=false);
+    bool saveFile(bool isSaveAs=false);
 };
 
 #endif // MAINWINDOW_H

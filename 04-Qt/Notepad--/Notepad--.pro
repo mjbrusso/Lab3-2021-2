@@ -22,13 +22,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+TRANSLATIONS += \
+            pt_BR.ts
 
-SOURCES += \
-        main.cpp \
-        mainwindow.cpp
+SOURCES += main.cpp \
+           mainwindow.cpp \
+           aboutdialog.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+        aboutdialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    aboutdialog.ui
+
+DISTFILES += \
+    img/logo.png
+
+RESOURCES += \
+    resources.qrc
